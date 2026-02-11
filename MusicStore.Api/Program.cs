@@ -35,6 +35,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowReactApp");
 app.UseRouting();
+
+// Add root route for health check
+app.MapGet("/", () => new { message = "Music Store API", version = "1.0", endpoints = new[] { "/api/songs", "/api/songs/{index}" } });
+
 app.MapControllers();
 
 // Configure port from Render's PORT environment variable
