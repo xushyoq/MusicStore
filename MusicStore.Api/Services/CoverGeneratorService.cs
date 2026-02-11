@@ -39,8 +39,14 @@ public class CoverGeneratorService : ICoverGeneratorService
             var y = random.Next(0, height);
             var size = random.Next(30, 120);
             
-            // Draw simple rectangle
-            image.Mutate(ctx => ctx.Fill(color, new Rectangle(x, y, size, size)));
+            // Draw simple rectangle by setting pixels directly
+            for (int py = y; py < Math.Min(y + size, height); py++)
+            {
+                for (int px = x; px < Math.Min(x + size, width); px++)
+                {
+                    image[px, py] = color;
+                }
+            }
         }
 
         // Add text representation using colored rectangles
@@ -70,10 +76,15 @@ public class CoverGeneratorService : ICoverGeneratorService
         var rectX = (int)(x - textWidth / 2);
         var rectY = (int)(y - textHeight / 2);
         
-        // Draw background for text
-        image.Mutate(ctx => ctx.Fill(
-            new Rgba32(color.R, color.G, color.B, (byte)(color.A * 0.3)),
-            new Rectangle(rectX, rectY, textWidth, textHeight)));
+        // Draw background for text by setting pixels directly
+        var bgColor = new Rgba32(color.R, color.G, color.B, (byte)(color.A * 0.3));
+        for (int py = Math.Max(0, rectY); py < Math.Min(rectY + textHeight, image.Height); py++)
+        {
+            for (int px = Math.Max(0, rectX); px < Math.Min(rectX + textWidth, image.Width); px++)
+            {
+                image[px, py] = bgColor;
+            }
+        }
     }
 
     private Rgba32 HsvToRgb(int h, int s, int v, byte alpha = 255)

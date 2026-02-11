@@ -105,8 +105,9 @@ public class DataGeneratorService : IDataGeneratorService
 
     private List<string> GenerateLyrics(Faker faker)
     {
-        return faker.Lorem.Sentences(faker.Random.Int(10, 20))
-            .Select(s => s?.Trim() ?? string.Empty)
+        var sentences = faker.Lorem.Sentences(faker.Random.Int(10, 20));
+        return sentences.Split('.')
+            .Select(s => s.Trim())
             .Where(s => !string.IsNullOrEmpty(s))
             .ToList();
     }
