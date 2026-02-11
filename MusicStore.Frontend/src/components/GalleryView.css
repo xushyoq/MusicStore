@@ -1,0 +1,34 @@
+.gallery-view {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.observer-target {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-more,
+.no-more {
+  padding: 1rem;
+  color: #666;
+  font-size: 1rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+

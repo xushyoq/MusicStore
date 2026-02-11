@@ -1,0 +1,22 @@
+services:
+  # Backend API
+  - type: web
+    name: musicstore-api
+    env: dotnet
+    buildCommand: cd MusicStore.Api && dotnet restore && dotnet publish -c Release -o ./publish
+    startCommand: cd MusicStore.Api/publish && dotnet MusicStore.Api.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+    healthCheckPath: /api/songs
+
+  # Frontend
+  - type: web
+    name: musicstore-frontend
+    env: static
+    buildCommand: cd MusicStore.Frontend && npm install && npm run build
+    staticPublishPath: ./MusicStore.Frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://musicstore-api.onrender.com/api
+
