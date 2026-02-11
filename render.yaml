@@ -10,12 +10,3 @@ services:
         value: Production
     healthCheckPath: /api/songs
 
-  # Frontend
-  - type: static_site
-    name: musicstore-frontend
-    buildCommand: cd MusicStore.Frontend && npm install && npm run build
-    staticPublishPath: ./MusicStore.Frontend/dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://musicstore-api.onrender.com/api
-
