@@ -2,6 +2,7 @@ services:
   # Backend API
   - type: web
     name: musicstore-api
+    plan: starter
     buildCommand: cd MusicStore.Api && dotnet restore && dotnet publish -c Release -o ./publish
     startCommand: cd MusicStore.Api/publish && dotnet MusicStore.Api.dll
     envVars:
