@@ -103,6 +103,7 @@ function attachEventListeners() {
 
 function switchViewMode(mode) {
   state.viewMode = mode;
+  state.expandedIndex = null; // Close expanded row when switching views
   
   if (mode === 'gallery') {
     elements.galleryViewBtn?.classList.add('active');
@@ -184,9 +185,9 @@ function renderTableView() {
       <td>${escapeHtml(song.genre)}</td>
     </tr>
     ${state.expandedIndex === song.index ? `
-    <tr>
+    <tr class="detail-row">
       <td colSpan="5">
-        <div id="songDetail-${song.index}"></div>
+        <div id="songDetail-${song.index}" class="table-song-detail">Loading...</div>
       </td>
     </tr>
     ` : ''}
@@ -241,7 +242,7 @@ function renderPagination() {
 function changePage(page) {
   if (page < 1 || page > state.totalPages) return;
   state.currentPage = page;
-  state.expandedIndex = null;
+  state.expandedIndex = null; // Close expanded row when changing page
   loadSongs();
 }
 
@@ -334,8 +335,10 @@ async function loadSongDetail(index, container) {
 }
 
 function renderSongDetail(song, container) {
+  const isTableDetail = container.classList.contains('table-song-detail');
+  
   container.innerHTML = `
-    <div class="song-detail">
+    <div class="song-detail ${isTableDetail ? 'table-detail' : ''}">
       <div class="detail-content">
         <div class="detail-cover">
           ${song.coverImageBase64 ? `

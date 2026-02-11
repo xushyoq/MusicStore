@@ -175,6 +175,51 @@ body {
   background-color: #e3f2fd;
 }
 
+.detail-row {
+  background-color: #f8f9fa;
+}
+
+.detail-row td {
+  padding: 0 !important;
+}
+
+.table-song-detail {
+  padding: 1.5rem;
+  background-color: #fff;
+}
+
+.song-detail.table-detail {
+  padding: 0;
+  border-top: none;
+}
+
+.song-detail.table-detail .detail-content {
+  max-width: 100%;
+  gap: 1.5rem;
+}
+
+.song-detail.table-detail .detail-cover {
+  width: 200px;
+  height: 200px;
+}
+
+.song-detail.table-detail .detail-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.song-detail.table-detail .music-player {
+  margin-bottom: 1rem;
+}
+
+.song-detail.table-detail .detail-meta {
+  margin-bottom: 1rem;
+}
+
+.song-detail.table-detail .detail-likes {
+  margin-bottom: 1rem;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
