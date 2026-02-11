@@ -2,6 +2,14 @@ using MusicStore.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Disable file watching in production to avoid inotify limits
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Configuration.Sources.OfType<Microsoft.Extensions.Configuration.Json.JsonConfigurationSource>()
+        .ToList()
+        .ForEach(source => source.ReloadOnChange = false);
+}
+
 // Add services
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
