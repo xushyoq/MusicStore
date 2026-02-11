@@ -37,12 +37,5 @@ app.UseCors("AllowReactApp");
 app.UseRouting();
 app.MapControllers();
 
-// Serve static files in production (if frontend is built into wwwroot)
-if (!app.Environment.IsDevelopment())
-{
-    app.UseDefaultFiles();
-    app.UseStaticFiles();
-}
-
 app.Run();
 
