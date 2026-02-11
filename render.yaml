@@ -2,7 +2,7 @@ services:
   # Backend API
   - type: web
     name: musicstore-api
-    env: dotnet
+    runtime: dotnet
     buildCommand: cd MusicStore.Api && dotnet restore && dotnet publish -c Release -o ./publish
     startCommand: cd MusicStore.Api/publish && dotnet MusicStore.Api.dll
     envVars:
@@ -11,9 +11,8 @@ services:
     healthCheckPath: /api/songs
 
   # Frontend
-  - type: web
+  - type: static_site
     name: musicstore-frontend
-    env: static
     buildCommand: cd MusicStore.Frontend && npm install && npm run build
     staticPublishPath: ./MusicStore.Frontend/dist
     envVars:
