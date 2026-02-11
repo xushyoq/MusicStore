@@ -2,8 +2,9 @@ services:
   # Backend API
   - type: web
     name: musicstore-api
-    dockerfilePath: ./MusicStore.Api/Dockerfile
-    dockerContext: .
+    rootDirectory: MusicStore.Api
+    buildCommand: dotnet restore && dotnet publish -c Release -o ./publish
+    startCommand: cd ./publish && dotnet MusicStore.Api.dll
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
