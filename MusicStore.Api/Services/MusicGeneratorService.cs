@@ -5,7 +5,7 @@ namespace MusicStore.Api.Services;
 
 public class MusicGeneratorService : IMusicGeneratorService
 {
-    public async Task<string> GenerateMusicAsync(long seed, string language)
+    public Task<string> GenerateMusicAsync(long seed, string language)
     {
         // Generate music parameters that can be used by Tone.js on frontend
         // This is a simplified approach - you can make it more sophisticated
@@ -21,7 +21,7 @@ public class MusicGeneratorService : IMusicGeneratorService
 
         var json = JsonSerializer.Serialize(musicData);
         var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
-        return base64;
+        return Task.FromResult(base64);
     }
 
     private List<string> GenerateNotes(Random random, int bars)
