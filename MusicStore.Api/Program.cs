@@ -37,5 +37,9 @@ app.UseCors("AllowReactApp");
 app.UseRouting();
 app.MapControllers();
 
+// Configure port from Render's PORT environment variable
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://0.0.0.0:{port}");
+
 app.Run();
 
