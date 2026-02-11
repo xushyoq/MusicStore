@@ -1,0 +1,80 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Music Store";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="app">
+        <div class="toolbar">
+            <div class="toolbar-left">
+                <h1 class="logo">iLearning</h1>
+                
+                <select id="languageSelect" class="language-select">
+                    <option value="en-US">English (US)</option>
+                    <option value="de-DE">German (Germany)</option>
+                    <option value="uk-UA">Ukrainian (Ukraine)</option>
+                </select>
+
+                <div class="seed-input-group">
+                    <input type="number" id="seedInput" class="seed-input" value="58933423" />
+                    <button id="randomSeedBtn" class="shuffle-btn" title="Random seed">🔀</button>
+                </div>
+
+                <div class="likes-slider-group">
+                    <label>Likes:</label>
+                    <input type="range" id="likesSlider" min="0" max="10" step="0.1" value="5.0" class="likes-slider" />
+                    <span id="likesValue" class="likes-value">5.0</span>
+                </div>
+            </div>
+
+            <div class="toolbar-right">
+                <button id="galleryViewBtn" class="view-btn active" title="Gallery View">⬜</button>
+                <button id="tableViewBtn" class="view-btn" title="Table View">☰</button>
+            </div>
+        </div>
+
+        <div id="tableView" class="table-view" style="display: none;">
+            <table class="songs-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Song</th>
+                        <th>Artist</th>
+                        <th>Album</th>
+                        <th>Genre</th>
+                    </tr>
+                </thead>
+                <tbody id="songsTableBody">
+                </tbody>
+            </table>
+
+            <div class="pagination" id="pagination">
+            </div>
+        </div>
+
+        <div id="galleryView" class="gallery-view">
+            <div class="gallery-grid" id="galleryGrid">
+            </div>
+        </div>
+
+        <div id="songDetail" class="song-detail-overlay" style="display: none;">
+            <div class="song-detail-container">
+                <button class="close-btn" onclick="closeSongDetail()">×</button>
+                <div id="songDetailContent" class="song-detail-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/app.js"></script>
+</body>
+</html>
+

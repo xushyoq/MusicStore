@@ -12,15 +12,7 @@ if (!builder.Environment.IsDevelopment())
 
 // Add services
 builder.Services.AddControllers();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowReactApp", policy =>
-    {
-        policy.AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-});
+builder.Services.AddRazorPages();
 builder.Services.AddScoped<IDataGeneratorService, DataGeneratorService>();
 builder.Services.AddScoped<ICoverGeneratorService, CoverGeneratorService>();
 builder.Services.AddScoped<IMusicGeneratorService, MusicGeneratorService>();
@@ -33,12 +25,10 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseCors("AllowReactApp");
+app.UseStaticFiles();
 app.UseRouting();
 
-// Add root route for health check
-app.MapGet("/", () => new { message = "Music Store API", version = "1.0", endpoints = new[] { "/api/songs", "/api/songs/{index}" } });
-
+app.MapRazorPages();
 app.MapControllers();
 
 // Configure port from Render's PORT environment variable
